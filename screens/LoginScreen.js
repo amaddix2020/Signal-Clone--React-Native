@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input, Image } from "react-native-elements";
 import { KeyboardAvoidingView } from "react-native";
 import { StatusBar } from 'expo-status-bar';
@@ -38,8 +38,12 @@ const LoginScreen = ({ navigation }) => {
           </View>
 
           <Button containerStyle={styles.button} onPress={signIn} title="Login"/>
-          <Button onPress={() => navigation.navigate("Register")} 
-          containerStyle={styles.button} type="outline" title="Register"/>
+          <Button 
+          onPress={() => navigation.navigate("Register")} 
+          containerStyle={styles.button} 
+          type="outline" 
+          title="Register"
+          />
           <View style={{ height: 100 }} />
           </KeyboardAvoidingView>
         
@@ -52,9 +56,9 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         alignItems: "center",
-        justifycontent: "center",
+        justifyContent: "center",
         padding:10,
-        backgroundColor: "White",
+        backgroundColor: "white",
     },
     inputContainer: {
         width:300,
