@@ -5,10 +5,10 @@ import { Button, Input, Text} from "react-native-elements";
 import { StatusBar } from 'expo-status-bar';
 
 const RegisterScreen = ({ navigation }) => {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -22,7 +22,7 @@ const RegisterScreen = ({ navigation }) => {
             <StatusBar style="Light" />
             
             <Text h3 style={{ marginBottom: 50 }}>
-                Create a Signal account
+                Create a Signal account 
             </Text>
 
             <View style={styles.inputContainer}>
@@ -55,7 +55,13 @@ const RegisterScreen = ({ navigation }) => {
                     />
             </View>
 
-            <Button onPress={register} title="Register" />
+            <Button 
+            containerStyle={styles.button}
+            raised
+            onPress={register}
+            title="Register" 
+            />
+           <View style={{ height: 100 }} /> 
         </KeyboardAvoidingView>
     );
 };
