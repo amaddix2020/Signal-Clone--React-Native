@@ -24,6 +24,7 @@ const HomeScreen = ({navigation}) => {
                 <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
             <Avatar rounded source={{ uri: auth?.currentUser?.photoURL  }} />
                 </TouchableOpacity>
+               
             </View>
         ),
       });
