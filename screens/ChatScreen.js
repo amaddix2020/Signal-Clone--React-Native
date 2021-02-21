@@ -29,7 +29,7 @@ const ChatScreen = ({ navigation, route }) => {
                    <Avatar 
                    rounded 
                    source={{ 
-                       uri:  "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png" ,
+                       uri: messages[0]?.data.photoURL,
                 }} 
                 />
                    <Text
@@ -65,7 +65,7 @@ const ChatScreen = ({ navigation, route }) => {
                 </View>
             )
         });
-    }, [navigation]);
+    }, [navigation, messages]);
 
     const sendMessage = () => {
         Keyboard.dismiss();
@@ -82,7 +82,12 @@ const ChatScreen = ({ navigation, route }) => {
     };
 
     useLayoutEffect(() => {
-        const unsubscribe = db.collection("chats").doc(route.params.id).collection("messages").orderBy("timestamp","desc").onSnapshot(snapshot => setMessages(
+        const unsubscribe = db
+        .collection("chats")
+        .doc(route.params.id)
+        .collection("messages")
+        .orderBy("timestamp","desc").
+        onSnapshot(snapshot => setMessages(
             snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data(),
@@ -104,18 +109,50 @@ const ChatScreen = ({ navigation, route }) => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <>
                    
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ paddingTop: 15}}>
                {messages.map(({id, data}) => 
                    data.email === auth.currentUser.email ? (
                         <View key={id} style={styles.receiver}>
-                            <Avatar />
-                            <Text style={styles.recieverText}>{data.message}</Text>
+                            <Avatar 
+                            position="absolute"
+                            rounded
+                            //WEB
+                            containerStyle={{
+                            position: "absolute",
+                            bottom: -15,
+                            right:-5,
+                            }}
+                            bottom={-15}
+                            right={-5}
+                            size={30}
+                            source={{
+                                uri: data.photoURL,
+                             }}
+                            />
+                            <Text style={styles.receiverText}>{data.message}</Text>
                         </View>
                    ) : (
-                        <View style={styles.sender}>
-                            <Avatar />
+                        <View key={id} style={styles.sender}>
+                            <Avatar 
+                               position="absolute"
+                               rounded
+                               //WEB
+                               containerStyle={{
+                               position: "absolute",
+                               bottom: -15,
+                               left:-5,
+                               }}
+                               bottom={-15}
+                               left={-5}
+                               rounded
+                               size={30}
+                               source={{
+                                   uri: data.photoURL,
+                                }}
+                            />
                             <Text style={styles.senderText}>{data.message}</Text>
-                        </View>
+                            <Text style={styles.senderName}>{data.displayName}</Text>
+                         </View>
                    )
                )}
 
@@ -144,7 +181,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    reciever: {
+    receiver: {
         padding: 15,
         backgroundColor: "#ECECEC",
         alignSelf: "flex-end",
@@ -162,6 +199,23 @@ const styles = StyleSheet.create({
         margin: 15,
         maxWidth: "80%",
         position: "relative",
+    },
+    senderText: {
+        color: "white",
+        fontWeight: "500",
+        marginLeft: 10,
+        marginBottom: 15,   
+    },
+    receiverText: {
+        color: "black",
+        fontWeight: "500",
+        marginLeft: 10, 
+    },
+    senderName: {
+        left: 10,
+        paddingRight: 10,
+        fontSize: 10,
+        color: "white",
     },
     footer: {
         flexDirection: "row",

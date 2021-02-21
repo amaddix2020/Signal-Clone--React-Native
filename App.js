@@ -8,6 +8,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
 import AddChatScreen from './screens/AddChatScreen';
 import ChatScreen from './screens/ChatScreen';
+console.disableYellowBox = true;
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-     // initialRouteName="Home"//
       screenOptions={globalScreenOptions}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
