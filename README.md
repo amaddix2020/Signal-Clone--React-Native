@@ -1,1 +1,1 @@
-# Signal-Clone--React-Native2
+# Signal-Clone--React-Native
